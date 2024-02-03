@@ -1,0 +1,488 @@
+*{
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+    font-family: arial;
+}
+
+body{
+    scroll-behavior: smooth;
+}
+
+h1{
+    font-size: 2.5rem;
+    text-align: center;
+}
+
+/* This is a practice bubble game
+====================================== */
+#bubble{
+    background-color: purple;
+    color: white;
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    gap: 15px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.container{
+    width: 90%;
+    background-color:white;
+    border-radius: 7px;
+}
+
+
+.navbar{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: purple;
+    width: 98.4%;
+    margin: 10px auto;
+    padding: 5px 30px;
+    border-top-left-radius: 7px;
+    border-top-right-radius: 7px;
+}
+
+.nav-item{
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.nav-item h2{
+    background-color: white;
+    color:black;
+    padding: 10px;
+    border-radius: 7px;
+}
+
+#bubble-container{
+    width: 100%;
+    display: flex;
+    padding: 5px 15px 15px;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.bubble-store{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    height: 78vh;
+}
+
+.bubble{
+    width: fit-content;
+    padding: 16px 21px;
+    font-size: 20px;
+    font-weight: 700;
+    background-color: purple;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.gmOver-container{
+    position: absolute;
+}
+
+.gmOver-container h2{
+    color: black;
+}
+
+.gmOver-container button{
+    font-weight: 900;
+    font-size: 16px;
+    padding: 10px;
+    background-color: gold;
+    border: none;
+    cursor: pointer;
+    border-radius: 7px;
+    margin: 10px auto 0px;
+    display: block;
+}
+
+
+/* This is a TODO LIST APP DESIGN 
+==================================*/
+#todo{
+    background-color: red;
+    color: white;
+    width: 100%;
+    min-height: 100vh;
+    display: grid;
+    place-items: center;
+    position: relative;
+}
+
+.todo-container{
+    display: grid;
+    place-items: center;
+}
+
+
+h3{
+    margin-block:10px;
+}
+
+table{
+    margin-block: 20px;
+}
+
+td, th{
+    padding: 10px;
+    text-align: center;
+}
+
+button{
+    padding: 10px;
+    border: none;
+    font-size: 18px;
+    color: black;
+    background-color: gold;
+    border-radius: 10px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.form-exit{
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-size: 35px;
+    cursor: pointer;
+}
+
+#form-container{
+    width: 100%;
+    min-height: 100vh;
+    position: absolute;
+    top: 0;
+    display: grid;
+    place-items: center;
+    background-color: #ffffff85;
+    visibility: hidden;
+}
+
+.form{
+    width: 70%;
+    background-color: white;
+    color: black;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 10px;
+    border-radius: 7px;
+}
+
+input{
+    padding: 10px;
+    border: 1px solid gray;
+    border-radius: 6px;
+    outline: none;
+    font-size: 18px;
+}
+
+.submit, .edit-submit{
+    background-color: green;
+    border: none;
+    color: white;
+    font-weight: bold;
+    font-size: 23px;
+    cursor: pointer;
+}
+
+#edit-form{
+    display: none;
+}
+
+
+/* Start writing css for CALCULATOR
+======================================*/
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+#calculator-container{
+    background-color: blue;
+    min-height: 100vh;
+    width: 100%;
+    display: flex; 
+    justify-content: center;
+    align-items: center;
+}
+
+.calculator{
+    background-color: white;
+    padding: 5px;
+    border-radius: 7px;
+}
+
+.calculator input{
+    width: 100%;
+    border: none;
+    outline: none;
+    padding: 10px;
+    background-color: rgba(0, 0, 0, 0.171);
+    border-top-left-radius: 7px;
+    border-top-right-radius: 7px;
+    font-weight: bold;
+    font-size: 40px;
+    text-align: right;
+}
+
+.numPad{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 10px;
+    border: 1px solid black;
+}
+
+.numPad span{
+    height: 3rem;
+    width: 20%;
+    display: flex;
+    justify-content: center;
+    align-items:center;
+    border-radius: 7px;
+    font-weight: bold;
+    font-size:2rem;
+    cursor: pointer;
+    background-color: red;
+}
+
+
+/* This is for Age Calculator */
+#age_calculator{
+    height: 100vh;
+    background: pink;
+}
+
+
+/* This is Tic Tac Toe game styling 
+=====================================*/
+.game{
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: purple;
+}
+
+.game-container{
+    padding: 1rem;
+    width: 80%;
+    display: flex;
+    background-color: white;
+    box-shadow: 0px 2px 5px white;
+    border-radius: 10px;
+}
+
+.game-part{
+    display: grid;
+    grid-template-columns: auto auto auto;
+    user-select: none;
+}
+
+.box{
+    height: 20vh;
+    width: 12vw;
+    border: 2px solid black;
+    font-size: 11vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.box:hover{
+    background: rgba(132, 179, 175, 0.322);
+}
+
+.bt{
+    border-top: none;
+}
+
+.br{
+    border-right: none;
+}
+
+.bb{
+    border-bottom: none;
+}
+
+.bl{
+    border-left: none;
+}
+
+.game-details{
+    margin-left: 30px;
+}
+
+.points{
+    display: flex;
+    align-items: center;
+}
+
+.resetBtn{
+    background: #800080;
+    border: none;
+    padding: 10px;
+    border-radius: 7px;
+    font-weight: 600;
+    color: white;
+    margin-top: 10px;
+    font-size: 2vw;
+    cursor: pointer;
+}
+
+.gameWin{
+    position: absolute;
+    padding: 20px;
+    border-radius: 7px;
+    background: white;
+    box-shadow: 0px 0px 10px black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+@media screen and (max-width:630px){
+    .game-container{
+        flex-direction: column;
+    }
+
+    .game-details{
+        display: grid;
+        place-items: center;
+    }
+
+    .game-details h1{
+        text-align: center;
+    }
+
+    .game-part{
+        margin: auto;
+    }
+
+    .box{
+        width: 20vw;
+    }
+
+    .game-details button{
+        font-size: 4vw;
+    }
+}
+
+.disable{
+    pointer-events: none;
+}
+
+
+
+/* This css is for fire game and the game is not complete
+   ====================================================  */
+#game{
+    background: url("https://i.pinimg.com/736x/89/e3/7d/89e37d9611818e81f65d368d0350e5c7.jpg") no-repeat;
+    background-size: cover;
+    object-fit: cover;
+    height: 100vh;
+    width: 100%;
+    user-select: none;
+    position: relative;
+    overflow: hidden;
+}
+
+.start{
+    position: relative;
+    top: 50%;
+    padding: 10px 21px;
+    font-size: 34px;
+    margin: auto;
+    display: block;
+    cursor: pointer;
+    z-index: 100;
+}
+
+.anime-section{
+    display: flex;
+    align-content: flex-start;
+    flex-wrap: wrap;
+    gap: 10px;
+    height: 87%;
+    transition: 3s;
+    position: relative;
+}
+
+.anime{
+    width: 100px;
+    position: absolute;
+    top: -25px;
+    animation: animeMove 15s linear infinite;
+}
+
+@keyframes animeMove{
+    0%{
+        top: -25px;
+    }
+    100%{
+        top: 115%;
+    }
+}
+
+.hero{
+    height: 13%;
+    margin: auto;
+}
+
+.heroChar-container{
+    display: flex;
+    width: fit-content;
+    margin: auto;
+}
+
+.heroChar-container img{
+    height: 100px;
+    object-fit: cover;
+}
+
+.bullet{
+    height: 50px !important;
+    object-fit: cover;
+    position: absolute;
+    animation: bullet 2s ease-in-out forwards;
+}
+
+@keyframes bullet{
+    0%{
+        top: calc(100% - 12%);
+    }
+    50%{
+        top: -80px;
+    }
+    100%{
+        top: -80px;
+    }
+}
+
+.point{
+    position: absolute;
+    top: 0;
+    right: 0;
+    text-align: center;
+    font-size: 30vw;
+    opacity: 0.6;
+}
