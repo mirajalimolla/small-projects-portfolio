@@ -114,7 +114,7 @@ h1{
 /* This is a TODO LIST APP DESIGN 
 ==================================*/
 #todo{
-    background-color: red;
+    background-color: rgb(44, 35, 35);
     color: white;
     width: 100%;
     min-height: 100vh;
@@ -214,7 +214,7 @@ input::-webkit-inner-spin-button {
 }
 
 #calculator-container{
-    background-color: blue;
+    background-color: rgb(23, 23, 70);
     min-height: 100vh;
     width: 100%;
     display: flex; 
@@ -247,7 +247,6 @@ input::-webkit-inner-spin-button {
     flex-wrap: wrap;
     gap: 10px;
     padding: 10px;
-    border: 1px solid black;
 }
 
 .numPad span{
@@ -260,7 +259,7 @@ input::-webkit-inner-spin-button {
     font-weight: bold;
     font-size:2rem;
     cursor: pointer;
-    background-color: red;
+    background-color: rgb(58, 54, 54);
 }
 
 
@@ -278,7 +277,7 @@ input::-webkit-inner-spin-button {
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: purple;
+    background-color: rgb(92, 31, 92);
 }
 
 .game-container{
@@ -337,7 +336,7 @@ input::-webkit-inner-spin-button {
 }
 
 .resetBtn{
-    background: #800080;
+    background: #000000;
     border: none;
     padding: 10px;
     border-radius: 7px;

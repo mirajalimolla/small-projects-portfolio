@@ -11,21 +11,21 @@ let bubbleUpdate;
 
 
 // Create target
-function targetFunc(){
+function targetFunc() {
     target.innerHTML = Math.floor(Math.random() * 10);
 }
 targetFunc();
 
 
 // Create timer
-function timerFunc(){
+function timerFunc() {
     let time = 59;
     let timeSet = setInterval(() => {
-        if(time <= 0){
+        if (time <= 0) {
             clearInterval(timeSet);
-            bubbleStore.style.visibility="hidden";
+            bubbleStore.style.visibility = "hidden";
             gameOver();
-            target.innerHTML="-";
+            target.innerHTML = "-";
         }
         timer.innerHTML = time--;
     }, 1000);
@@ -34,9 +34,9 @@ timerFunc();
 
 
 // Check Which bubble I clicked and score increase
-bubbleContainer.addEventListener('click', function(click){
+bubbleContainer.addEventListener('click', function (click) {
     let bubbleNo = click.target.textContent;
-    if(bubbleNo == target.textContent){
+    if (bubbleNo == target.textContent) {
         scoreVal++;
         score.innerHTML = scoreVal;
         targetFunc();
@@ -46,10 +46,10 @@ bubbleContainer.addEventListener('click', function(click){
 
 
 // Create bubbles and generate random number in bubble
-function bubbleGenerate(){
+function bubbleGenerate() {
     let bubble = "";
-    for(let i=0; i< 150;i++){
-        let rn = Math.floor(Math.random()*10);
+    for (let i = 0; i < 150; i++) {
+        let rn = Math.floor(Math.random() * 10);
         bubble += `<div class="bubble">${rn}</div>`;
         bubbleStore.innerHTML = bubble;
     }
@@ -58,7 +58,7 @@ bubbleGenerate();
 
 
 // Game Over function
-function gameOver(){
+function gameOver() {
     let gmOverContainer = document.createElement("div")
     gmOverContainer.classList.add("gmOver-container");
     bubbleContainer.appendChild(gmOverContainer);
@@ -71,16 +71,15 @@ function gameOver(){
     gmOverBtn.innerText = "Play Again";
     gmOverContainer.appendChild(gmOverBtn);
 
-    gmOverBtn.addEventListener("click", function(){
+    gmOverBtn.addEventListener("click", function () {
         targetFunc();
         timerFunc();
         scoreVal = 0;
         score.innerHTML = 0;
-        document.querySelector(".gmOver-container").style.display="none";
-        bubbleStore.style.visibility="visible";
+        document.querySelector(".gmOver-container").style.display = "none";
+        bubbleStore.style.visibility = "visible";
     });
 }
-
 
 
 // This is a TODO App
@@ -97,24 +96,24 @@ let tbody = document.querySelector("tbody");
 let taskNo = 1;
 let tr;
 
-function add(){
+function add() {
     form.style.visibility = "visible";
-    document.querySelector("h1").style.opacity=0;
+    document.querySelector("h1").style.opacity = 0;
 }
 
-function exit(){
+function exit() {
     form.style.visibility = "hidden";
-    document.querySelector("h1").style.opacity=1;
+    document.querySelector("h1").style.opacity = 1;
 }
 
-function editExit(){
+function editExit() {
     edit_form.style.visibility = "hidden";
-    document.querySelector("h1").style.opacity=1;
+    document.querySelector("h1").style.opacity = 1;
 }
 
-submit.addEventListener("click", function(e){
+submit.addEventListener("click", function (e) {
     e.preventDefault();
-    if((name.value.length >= 1) && (time.value.length >= 1) &&(place.value.length >= 1) ){
+    if ((name.value.length >= 1) && (time.value.length >= 1) && (place.value.length >= 1)) {
         tr = document.createElement("tr");
         tbody.appendChild(tr);
         tr.classList.add("task");
@@ -156,18 +155,19 @@ submit.addEventListener("click", function(e){
     let edit_task = document.querySelectorAll(".edit");
     let task = document.querySelectorAll(".task");
 
-    for(let i=0;i<task.length;i++){
-        edit_task.forEach((i) => { 
-            i.onclick = () =>{
-                edit_form.style.visibility="visible";                
-                document.querySelector(".edit-time").value = i.parentElement.parentElement.children[1].textContent;
-                document.querySelector(".edit-name").value = i.parentElement.parentElement.children[2].textContent;
-                document.querySelector(".edit-desc").value = i.parentElement.parentElement.children[3].textContent;
-                editSubmit.addEventListener("click", function(e){
+    for (let i = 0; i < task.length; i++) {
+        edit_task.forEach((i) => {
+            i.onclick = () => {
+                edit_form.style.visibility = "visible";
+                let selectedTask = i.parentElement.parentElement.children;
+                document.querySelector(".edit-time").value = selectedTask[1].textContent;
+                document.querySelector(".edit-name").value = selectedTask[2].textContent;
+                document.querySelector(".edit-desc").value = selectedTask[3].textContent;
+                editSubmit.addEventListener("click", function (e) {
                     e.preventDefault();
-                    i.parentElement.parentElement.children[1].textContent = document.querySelector(".edit-time").value;
-                    i.parentElement.parentElement.children[2].textContent = document.querySelector(".edit-name").value;
-                    i.parentElement.parentElement.children[3].textContent = document.querySelector(".edit-desc").value;
+                    selectedTask[1].textContent = document.querySelector(".edit-time").value;
+                    selectedTask[2].textContent = document.querySelector(".edit-name").value;
+                    selectedTask[3].textContent = document.querySelector(".edit-desc").value;
                     editExit();
                 });
             }
@@ -175,10 +175,10 @@ submit.addEventListener("click", function(e){
     }
 
     let remove = document.querySelectorAll(".remove");
-    for(let i=0;i<remove.length;i++){
+    for (let i = 0; i < remove.length; i++) {
         remove[i].onclick = () => {
             let confirmRemove = confirm(`Are you sure you want to delete this task`);
-            if(confirmRemove){
+            if (confirmRemove) {
                 remove[i].parentElement.parentElement.remove();
             }
         }
@@ -198,32 +198,32 @@ let miltipli = document.querySelector(".miltipli");
 let persentage = document.querySelector(".persentage");
 
 
-function backspace(){
+function backspace() {
     numInput.value = numInput.value.slice(0, -1);
 }
-function result(){
+function result() {
     let plusIndex = numInput.value.indexOf("+");
     let minusIndex = numInput.value.indexOf("-");
     let multiplyndex = numInput.value.indexOf("*");
     let devitionIndex = numInput.value.indexOf("/");
     let moulasIndex = numInput.value.indexOf("%");
-    if(numInput.value.includes("+")){
+    if (numInput.value.includes("+")) {
         numInput.value = Number(numInput.value.slice(0, plusIndex)) + Number(numInput.value.slice(++plusIndex, numInput.value.length));
     }
-    
-    if(numInput.value.includes("-")){
+
+    if (numInput.value.includes("-")) {
         numInput.value = Number(numInput.value.slice(0, minusIndex)) - Number(numInput.value.slice(++minusIndex, numInput.value.length));
     }
-    
-    if(numInput.value.includes("*")){
+
+    if (numInput.value.includes("*")) {
         numInput.value = Number(numInput.value.slice(0, multiplyndex)) * Number(numInput.value.slice(++multiplyndex, numInput.value.length));
     }
-    
-    if(numInput.value.includes("/")){
+
+    if (numInput.value.includes("/")) {
         numInput.value = Number(numInput.value.slice(0, devitionIndex)) / Number(numInput.value.slice(++devitionIndex, numInput.value.length));
     }
 
-    if(numInput.value.includes("%")){
+    if (numInput.value.includes("%")) {
         numInput.value = Number(numInput.value.slice(0, moulasIndex)) / Number(numInput.value.slice(++moulasIndex, numInput.value.length));
     }
 }
@@ -232,7 +232,7 @@ function result(){
 // Age calculator
 // ================
 
-function start(){
+function start() {
     let userDay = document.querySelector(".day").value;
     let userMonth = document.querySelector(".month").value;
     let userYear = document.querySelector(".year").value;
@@ -243,7 +243,7 @@ function start(){
 
     let date = new Date();
     let currentDate = date.getDate();
-    let currentMonth = date.getMonth()+1;
+    let currentMonth = date.getMonth() + 1;
     let currentYear = date.getFullYear();
 
     while (userYear < currentYear) {
@@ -252,21 +252,21 @@ function start(){
         userYear++;
     }
 
-    while(userMonth < currentMonth){
+    while (userMonth < currentMonth) {
         month++;
         userMonth++;
     }
 
-    while(userDay < currentDate){
+    while (userDay < currentDate) {
         day++;
         userDay++;
     }
-    let calAllDay = (year*365) + (month)
+    // let calAllDay = (year * 365) + (month)
     document.querySelector(".alive").innerHTML = `You are alive now ${year} year ${month} months and ${day} days`;
 
-    document.querySelector(".aliveMonth").innerHTML = `You are alive ${Math.floor( (year*365/30) + (month) )} months`;
-    document.querySelector(".aliveWeek").innerHTML = `You are alive ${Math.floor((year*365)/7)} weeks`;
-    document.querySelector(".aliveDay").innerHTML = `You are alive ${Math.floor(year/365)} days`;
+    document.querySelector(".aliveMonth").innerHTML = `You are alive ${Math.floor((year * 365 / 30) + (month))} months`;
+    document.querySelector(".aliveWeek").innerHTML = `You are alive ${Math.floor((year * 365) / 7)} weeks`;
+    document.querySelector(".aliveDay").innerHTML = `You are alive ${Math.floor(year / 365)} days`;
 }
 
 
@@ -278,43 +278,43 @@ let clickCount = 0;
 let pointX = 0;
 let pointY = 0;
 
-for(let i=0;i<box.length;i++){
-    box[i].addEventListener("click", function(){
+for (let i = 0; i < box.length; i++) {
+    box[i].addEventListener("click", function () {
         clickCount++;
-        if(clickCount === 1){
+        if (clickCount === 1) {
             box[i].innerHTML = "X";
             box[i].classList.add("disable");
         }
-        if(clickCount === 2){
+        if (clickCount === 2) {
             box[i].innerHTML = "O";
             box[i].classList.add("disable");
         }
-        if(clickCount === 3){
+        if (clickCount === 3) {
             box[i].innerHTML = "X";
             box[i].classList.add("disable");
         }
-        if(clickCount === 4){
+        if (clickCount === 4) {
             box[i].innerHTML = "O";
             box[i].classList.add("disable");
         }
-        if(clickCount === 5){
+        if (clickCount === 5) {
             box[i].innerHTML = "X";
             box[i].classList.add("disable");
         }
-        if(clickCount === 6){
+        if (clickCount === 6) {
             box[i].innerHTML = "O";
             box[i].classList.add("disable");
         }
-        if(clickCount === 7){
+        if (clickCount === 7) {
             box[i].innerHTML = "X";
             box[i].classList.add("disable");
         }
-        if(clickCount === 8){
+        if (clickCount === 8) {
             box[i].innerHTML = "O";
             box[i].classList.add("disable");
         }
-        if(clickCount === 9){
-            box[i].innerHTML = "X"; 
+        if (clickCount === 9) {
+            box[i].innerHTML = "X";
             box[i].classList.add("disable");
         }
         gameLogic();
@@ -322,7 +322,7 @@ for(let i=0;i<box.length;i++){
 }
 
 // This function is provide the logic of the game
-function gameLogic(){
+function gameLogic() {
     let box1 = document.querySelector(".box1").innerHTML;
     let box2 = document.querySelector(".box2").innerHTML;
     let box3 = document.querySelector(".box3").innerHTML;
@@ -333,47 +333,47 @@ function gameLogic(){
     let box8 = document.querySelector(".box8").innerHTML;
     let box9 = document.querySelector(".box9").innerHTML;
 
-    if( ((box1 && box2 && box3) === "O") || ((box1 && box2 && box3) === "X") ){
+    if (((box1 && box2 && box3) === "O") || ((box1 && box2 && box3) === "X")) {
         gameWin();
     }
 
-    if( ((box4 && box5 && box6) === "O") || ((box4 && box5 && box6) === "X") ){
+    if (((box4 && box5 && box6) === "O") || ((box4 && box5 && box6) === "X")) {
         gameWin();
     }
 
-    if( ((box7 && box8 && box9) === "O") || ((box7 && box8 && box9) === "X") ){
+    if (((box7 && box8 && box9) === "O") || ((box7 && box8 && box9) === "X")) {
         gameWin();
     }
 
-    if( ((box1 && box4 && box7) === "O") || ((box1 && box4 && box7) === "X") ){
+    if (((box1 && box4 && box7) === "O") || ((box1 && box4 && box7) === "X")) {
         gameWin();
     }
 
-    if( ((box2 && box5 && box8) === "O") || ((box2 && box5 && box8) === "X") ){
+    if (((box2 && box5 && box8) === "O") || ((box2 && box5 && box8) === "X")) {
         gameWin();
     }
 
-    if( ((box3 && box6 && box9) === "O") || ((box3 && box6 && box9) === "X") ){
+    if (((box3 && box6 && box9) === "O") || ((box3 && box6 && box9) === "X")) {
         gameWin();
     }
 
-    if( ((box1 && box5 && box9) === "O") || ((box1 && box5 && box9) === "X") ){
+    if (((box1 && box5 && box9) === "O") || ((box1 && box5 && box9) === "X")) {
         gameWin();
     }
 
-    if( ((box3 && box5 && box7) === "O") || ((box3 && box5 && box7) === "X") ){
+    if (((box3 && box5 && box7) === "O") || ((box3 && box5 && box7) === "X")) {
         gameWin();
     }
 }
 
 
-function gameWin(){
+function gameWin() {
     alert("You are win");
 }
 
-function tictactoeReset(){
-    box.forEach((boxes)=>{
-        boxes.innerHTML="";
+function tictactoeReset() {
+    box.forEach((boxes) => {
+        boxes.innerHTML = "";
         boxes.classList.remove("disable");
     });
 }
@@ -397,8 +397,8 @@ let bullet;
 let point = 0;
 let anime;
 
-function gameStart(){
-document.querySelector(".age_click").style.display="none";  
+function gameStart() {
+    document.querySelector(".age_click").style.display = "none";
     // press arrow key to move the hero
     window.addEventListener('keydown', function (keyCode) {
         heroPosition = heroCharContainer.getBoundingClientRect();
