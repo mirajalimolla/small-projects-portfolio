@@ -279,7 +279,7 @@ let pointX = 0;
 let pointY = 0;
 
 for (let i = 0; i < box.length; i++) {
-    box[i].addEventListener("click", function () {
+    box[i].addEventListener("click", function player() {
         clickCount++;
         if (clickCount === 1) {
             box[i].innerHTML = "X";
@@ -323,52 +323,24 @@ for (let i = 0; i < box.length; i++) {
 
 // This function is provide the logic of the game
 function gameLogic() {
-    let box1 = document.querySelector(".box1").innerHTML;
-    let box2 = document.querySelector(".box2").innerHTML;
-    let box3 = document.querySelector(".box3").innerHTML;
-    let box4 = document.querySelector(".box4").innerHTML;
-    let box5 = document.querySelector(".box5").innerHTML;
-    let box6 = document.querySelector(".box6").innerHTML;
-    let box7 = document.querySelector(".box7").innerHTML;
-    let box8 = document.querySelector(".box8").innerHTML;
-    let box9 = document.querySelector(".box9").innerHTML;
+    const arr = [
+        [1, 2, 3], [4, 5, 6], [7, 8, 9], 
+        [1, 4, 7], [2, 5, 8], [3, 6, 9],
+        [1, 5, 9], [3, 5, 7]
+    ];
 
-    if (((box1 && box2 && box3) === "O") || ((box1 && box2 && box3) === "X")) {
-        gameWin();
+    for(const dataWins of arr){
+        const [a, b, c] = dataWins;
+        if(arr[a] === arr[b] && arr[a] === arr[c]){
+            return arr[a];
+        }
     }
-
-    if (((box4 && box5 && box6) === "O") || ((box4 && box5 && box6) === "X")) {
-        gameWin();
-    }
-
-    if (((box7 && box8 && box9) === "O") || ((box7 && box8 && box9) === "X")) {
-        gameWin();
-    }
-
-    if (((box1 && box4 && box7) === "O") || ((box1 && box4 && box7) === "X")) {
-        gameWin();
-    }
-
-    if (((box2 && box5 && box8) === "O") || ((box2 && box5 && box8) === "X")) {
-        gameWin();
-    }
-
-    if (((box3 && box6 && box9) === "O") || ((box3 && box6 && box9) === "X")) {
-        gameWin();
-    }
-
-    if (((box1 && box5 && box9) === "O") || ((box1 && box5 && box9) === "X")) {
-        gameWin();
-    }
-
-    if (((box3 && box5 && box7) === "O") || ((box3 && box5 && box7) === "X")) {
-        gameWin();
-    }
+    return null;
 }
 
 
 function gameWin() {
-    alert("You are win");
+    document.querySelector(".gameWin").classList.remove("congrats");
 }
 
 function tictactoeReset() {
@@ -397,109 +369,102 @@ let bullet;
 let point = 0;
 let anime;
 
-function gameStart() {
-    document.querySelector(".age_click").style.display = "none";
-    // press arrow key to move the hero
-    window.addEventListener('keydown', function (keyCode) {
-        heroPosition = heroCharContainer.getBoundingClientRect();
-        let keycode = keyCode.keyCode;
-        if (keycode == 37 && heroPosition.left > 0) {
-            heroCharContainer.style.marginLeft = heroPosition.left - 20 + "px";
-        }
-        let heroWidth = document.querySelector(".hero").offsetWidth;
-        if (keycode == 39 && heroPosition.left < (heroWidth - heroPosition.width)) {
-            heroCharContainer.style.marginLeft = heroPosition.left + 20 + "px";
-        }
-    });
-
-    // Hero move by mouse movements
-    let heroCharWidth = heroCharContainer.offsetWidth;
-    game.addEventListener("mousemove", function (details) {
-        heroCharContainer.style.marginLeft = `${details.clientX - heroCharWidth / 2}px`;
-    });
-
-    // This function is generate the bullets
-    function bulletGenerate() {
-        bullet = document.createElement("img");
-        bullet.src = "bullet.png"
-        bullet_container.appendChild(bullet);
-        bullet.classList.add("bullet");
-
-        bulletWidth = bullet.offsetWidth;
-
-        animeDistroy();
+document.querySelector(".age_click").style.display = "none";
+// press arrow key to move the hero
+window.addEventListener('keydown', function (keyCode) {
+    heroPosition = heroCharContainer.getBoundingClientRect();
+    let keycode = keyCode.keyCode;
+    if (keycode == 37 && heroPosition.left > 0) {
+        heroCharContainer.style.marginLeft = heroPosition.left - 20 + "px";
     }
+    let heroWidth = document.querySelector(".hero").offsetWidth;
+    if (keycode == 39 && heroPosition.left < (heroWidth - heroPosition.width)) {
+        heroCharContainer.style.marginLeft = heroPosition.left + 20 + "px";
+    }
+});
 
-    // Press the space key on keyboard to fire the bullet
-    addEventListener('keypress', function (keyCode) {
-        let key = keyCode.keyCode;
-        if (key === 32 || key === 38) {
-            bulletGenerate();
-            bullet.style.left = `${heroPosition.left + (heroCharWidth / 2) - (bulletWidth / 2)}px`;
-        }
-    });
+// Hero move by mouse movements
+let heroCharWidth = heroCharContainer.offsetWidth;
+game.addEventListener("mousemove", function (details) {
+    heroCharContainer.style.marginLeft = `${details.clientX - heroCharWidth / 2}px`;
+});
 
-    // fire the bullets with mouse click
-    game.addEventListener("click", function (e) {
+// This function is generate the bullets
+function bulletGenerate() {
+    bullet = document.createElement("img");
+    bullet.src = "bullet.png"
+    bullet_container.appendChild(bullet);
+    bullet.classList.add("bullet");
+    bulletWidth = bullet.offsetWidth;
+    animeDistroy();
+}
+
+// Press the space key on keyboard to fire the bullet
+addEventListener('keypress', function (keyCode) {
+    let key = keyCode.keyCode;
+    if (key === 32 || key === 38) {
         bulletGenerate();
-        bullet.style.left = `${e.clientX - bulletWidth / 2}px`;
-    });
-
-    // Generate the Anime
-    function animeGenerate() {
-        let animeTimeer = setInterval(() => {
-            anime = document.createElement("img");
-            anime.src = "anime.png";
-            animeContainer.appendChild(anime);
-            anime.classList.add("anime");
-            anime.style.left = `${Math.floor(Math.random() * window.innerWidth)}px`;
-        }, 2000);
+        bullet.style.left = `${heroPosition.left + (heroCharWidth / 2) - (bulletWidth / 2)}px`;
     }
-    animeGenerate();
+});
 
-    // This function is remove the anime by shooting the bullet
-    function animeDistroy() {
-        let animeDetector = document.querySelectorAll(".anime");
-        for (let i = 0; i < animeDetector.length; i++) {
-            let getAnime = animeDetector[i];
+// fire the bullets with mouse click
+game.addEventListener("click", function (e) {
+    bulletGenerate();
+    bullet.style.left = `${e.clientX - bulletWidth / 2}px`;
+});
 
-            if (getAnime != undefined) {
-                animePosition = getAnime.getBoundingClientRect();
-                bulletPosition = bullet.getBoundingClientRect();
+// Generate the Anime
+function animeGenerate() {
+    let animeTimeer = setInterval(() => {
+        anime = document.createElement("img");
+        anime.src = "anime.png";
+        animeContainer.appendChild(anime);
+        anime.classList.add("anime");
+        anime.style.left = `${Math.floor(Math.random() * window.innerWidth)}px`;
+    }, 2000);
+}
+// animeGenerate();
 
-                let bulletLeft = bulletPosition.left - heroCharWidth / 2;
-                let bulletRight = bulletPosition.right - heroCharWidth / 2;
+// This function is remove the anime by shooting the bullet
+function animeDistroy() {
+    let animeDetector = document.querySelectorAll(".anime");
+    for (let i = 0; i < animeDetector.length; i++) {
+        let getAnime = animeDetector[i];
 
-                if (bulletLeft >= animePosition.left && bulletRight <= animePosition.right && bulletPosition.bottom >= animePosition.bottom && bulletPosition.top >= animePosition.top) {
-                    getAnime.remove();
-                    pointer.innerHTML = ++point;
-                }
+        if (getAnime != undefined) {
+            animePosition = getAnime.getBoundingClientRect();
+            bulletPosition = bullet.getBoundingClientRect();
+
+            let bulletLeft = bulletPosition.left - heroCharWidth / 2;
+            let bulletRight = bulletPosition.right - heroCharWidth / 2;
+
+            if (bulletLeft >= animePosition.left && bulletRight <= animePosition.right && bulletPosition.bottom >= animePosition.bottom && bulletPosition.top >= animePosition.top) {
+                getAnime.remove();
+                pointer.innerHTML = ++point;
             }
         }
     }
-
-    // Game Over
-    let amss = document.querySelector(".anime");
-    let animePositionForOverTheGame = window.getComputedStyle(amss).getPropertyValue("top");
-    alert(animePositionForOverTheGame);
-    if (positionAnime <= 300) {
-        alert("Game over");
-    }
-
-
-    // Remove the bullet evry second
-    game.addEventListener("click", function () {
-        let bulletRemover;
-        function stopRemoveBubble() {
-            clearInterval(bulletRemover);
-        }
-        if (bullet_container.childElementCount >= 1) {
-            bulletRemover = setInterval(() => {
-                bullet_container.firstElementChild.remove();
-            }, 1000);
-        }
-        if (bullet_container.childElementCount > 1) {
-            stopRemoveBubble();
-        }
-    });
 }
+
+// Game Over
+function gameOver(){
+    // let animePositionForOverTheGame = window.getComputedStyle(document.querySelector(".anime")).getPropertyValue("top")+"px";
+    // if (animePosition.top <= 300) {
+    //     console.log("Game over");
+    // }
+}
+gameOver()
+
+
+// Remove the bullet evry second
+game.addEventListener("click", function () {
+    let bulletRemover;
+    if (bullet_container.childElementCount >= 5) {
+        bulletRemover = setInterval(() => {
+            bullet_container.firstElementChild.remove();
+        }, 1000);
+    }else{
+        clearInterval(bulletRemover);
+    }
+});

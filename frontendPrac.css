@@ -359,6 +359,10 @@ input::-webkit-inner-spin-button {
     flex-direction: column;
 }
 
+.congrats{
+    visibility: hidden;
+}
+
 @media screen and (max-width:630px){
     .game-container{
         flex-direction: column;
