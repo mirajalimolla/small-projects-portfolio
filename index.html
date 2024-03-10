@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="frontendPrac.css">
-    <title>TODO LIST</title>
+    <title>Small Projects Portfolio</title>
 </head>
 <body>
     <!-- This is the bubble game
@@ -213,15 +213,15 @@
     <section class="game">
         <div class="game-container">
             <div class="game-part">
-                <div class="box bt bl" data-index=""></div>
-                <div class="box bt" data-index=""></div>
-                <div class="box bt br" data-index=""></div>
-                <div class="box bl" data-index=""></div>
-                <div class="box" data-index=""></div>
-                <div class="box br" data-index=""></div>
-                <div class="box bb bl" data-index=""></div>
-                <div class="box bb" data-index=""></div>
-                <div class="box bb br" data-index=""></div>
+                <div class="box bt bl"></div>
+                <div class="box bt"></div>
+                <div class="box bt br"></div>
+                <div class="box bl"></div>
+                <div class="box"></div>
+                <div class="box br"></div>
+                <div class="box bb bl"></div>
+                <div class="box bb"></div>
+                <div class="box bb br"></div>
             </div>
             <div class="game-details">
                 <h2>This game created by MIRAJ</h2>
@@ -233,9 +233,13 @@
             </div>
         </div>
         <div class="gameWin congrats">
-            <h2>"X"</h2>
+            <h2 class="winner"></h2>
             <p style="margin-block: 5px;">Congratulation you win</p>
-            <button class="resetBtn" onclick="tictactoeReset()">Reset</button>
+            <button class="resetBtn" onclick="tictactoeReset()">New Game</button>
+        </div>
+        <div class="gameWin drawSection draw">
+            <p style="margin-block: 5px;">Ooops the game is draw</p>
+            <button class="resetBtn" onclick="tictactoeReset()">New Game</button>
         </div>
     </section>
 

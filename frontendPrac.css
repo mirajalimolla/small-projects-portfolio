@@ -359,7 +359,7 @@ input::-webkit-inner-spin-button {
     flex-direction: column;
 }
 
-.congrats{
+.congrats, .draw{
     visibility: hidden;
 }
 

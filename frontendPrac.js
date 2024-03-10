@@ -274,80 +274,74 @@ function start() {
 // =================================
 
 let box = document.querySelectorAll(".box");
-let clickCount = 0;
-let pointX = 0;
-let pointY = 0;
+let congrats = document.querySelector(".gameWin");
+let winner = document.querySelector(".winner");
+let drawSection = document.querySelector(".drawSection");
+let turn = "X";
+let count = 0;
 
-for (let i = 0; i < box.length; i++) {
-    box[i].addEventListener("click", function player() {
-        clickCount++;
-        if (clickCount === 1) {
-            box[i].innerHTML = "X";
-            box[i].classList.add("disable");
+// Click to display the user turn
+box.forEach((elem) => {
+    elem.addEventListener("click", function(event){
+        if(event.target.innerHTML == ""){
+            ++count;
+            event.target.innerHTML= turn;
+            turn = turn == "X" ? "0" : "X";
+            gameWin();
+            checkDraw();
         }
-        if (clickCount === 2) {
-            box[i].innerHTML = "O";
-            box[i].classList.add("disable");
-        }
-        if (clickCount === 3) {
-            box[i].innerHTML = "X";
-            box[i].classList.add("disable");
-        }
-        if (clickCount === 4) {
-            box[i].innerHTML = "O";
-            box[i].classList.add("disable");
-        }
-        if (clickCount === 5) {
-            box[i].innerHTML = "X";
-            box[i].classList.add("disable");
-        }
-        if (clickCount === 6) {
-            box[i].innerHTML = "O";
-            box[i].classList.add("disable");
-        }
-        if (clickCount === 7) {
-            box[i].innerHTML = "X";
-            box[i].classList.add("disable");
-        }
-        if (clickCount === 8) {
-            box[i].innerHTML = "O";
-            box[i].classList.add("disable");
-        }
-        if (clickCount === 9) {
-            box[i].innerHTML = "X";
-            box[i].classList.add("disable");
-        }
-        gameLogic();
     });
+});
+
+// This is the pattern of game win
+const arr = [
+    [0, 1, 2],
+    [3, 4, 5],
+    [6, 7, 8],
+    [0, 3, 6],
+    [1, 4, 7],
+    [2, 5, 8],
+    [0, 4, 8],
+    [2, 4, 7]
+];
+
+function checkDraw(){
+    let isWin = gameWin();
+    if(count === 9 && isWin != true){
+        drawSection.classList.remove("draw");
+    }
 }
 
-// This function is provide the logic of the game
-function gameLogic() {
-    const arr = [
-        [1, 2, 3], [4, 5, 6], [7, 8, 9], 
-        [1, 4, 7], [2, 5, 8], [3, 6, 9],
-        [1, 5, 9], [3, 5, 7]
-    ];
+// This function is who win the game
+function gameWin() {
+    for(pattern of arr){
+        let position1 = box[pattern[0]].innerText
+        let position2 = box[pattern[1]].innerText
+        let position3 = box[pattern[2]].innerText;
 
-    for(const dataWins of arr){
-        const [a, b, c] = dataWins;
-        if(arr[a] === arr[b] && arr[a] === arr[c]){
-            return arr[a];
+        if(position1 !== "" && position2 !== "" && position3 !== ""){
+            if((position1 === position2) && (position2 === position3)){
+                console.log("You are the winner" + position1);
+                congratulation();                
+                winner.innerText = `"${position1}"`;
+            }
         }
     }
-    return null;
+    
 }
 
-
-function gameWin() {
-    document.querySelector(".gameWin").classList.remove("congrats");
-}
-
+// Reset the game
 function tictactoeReset() {
     box.forEach((boxes) => {
         boxes.innerHTML = "";
         boxes.classList.remove("disable");
+        turn = "X";
+        congrats.classList.add("congrats");
     });
+}
+
+function congratulation(){
+    congrats.classList.remove("congrats");
 }
 
 
@@ -424,7 +418,7 @@ function animeGenerate() {
         anime.style.left = `${Math.floor(Math.random() * window.innerWidth)}px`;
     }, 2000);
 }
-// animeGenerate();
+animeGenerate();
 
 // This function is remove the anime by shooting the bullet
 function animeDistroy() {
